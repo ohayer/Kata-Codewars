@@ -2,7 +2,6 @@ package Train;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class Main01 {
     public static void main(String[] args) {

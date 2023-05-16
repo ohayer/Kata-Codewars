@@ -1,30 +1,29 @@
 package Level4;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class FoundTheBigNumber {
 
-    //ToDo: Finish this method
     public static long nextBiggerNumber(long n) {
-        long lenght = String.valueOf(n).length();
-        Long[] numbers = new Long[Math.toIntExact(lenght)];
-        for (long i = lenght-1; i >=0 ; i--) {
+        long l1 = String.valueOf(n).length();
+        Long[] numbers = new Long[Math.toIntExact(l1)];
+        Arrays.stream(numbers).sorted();
+        for (long i = l1-1; i >=0 ; i--) {
             numbers[Math.toIntExact(i)] = n%10;
             n/=10;
         }
-        for (int i = 0; i < numbers.length; i++) {
-            try{
-                if (numbers[i]>numbers[i++]){
-                    System.out.println(i);
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-    return Arrays.stream(numbers).count();
+        List<Long> list = new ArrayList<>(Arrays.asList(numbers));
+        Collections.reverse(list);
+    long result = list.stream().mapToLong(Long::valueOf)
+            .reduce(0L, (a, b) -> Long.parseLong(String.valueOf(a) + String.valueOf(b)));;
+    return result;
     }
 
     public static void main(String[] args) {
         System.out.println(nextBiggerNumber(12L));
+        System.out.println(nextBiggerNumber(2017));
     }
 }
